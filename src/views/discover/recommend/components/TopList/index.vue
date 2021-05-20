@@ -2,31 +2,29 @@
  * @Author: 唐云 
  * @Date: 2021-05-20 09:09:56 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:55:58
+ * @Last Modified time: 2021-05-20 13:47:08
  榜单
  */
 <template>
   <div class="top-list">
     <t-recommend-title :title="'榜单'" :url="'/discover/top-list'" />
-    <div class="content"></div>
+    <div class="content">
+      <t-top-ranking :id="3" />
+      <t-top-ranking :id="0" />
+      <t-top-ranking :id="2" />
+    </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import TRecommendTitle from '@/components/TRecommendTitle'
-import { getTopList } from '@/api/discover/recommend'
+import TTopRanking from '@/components/TTopRanking'
 
 export default defineComponent({
   name: 'RecommendTopList',
-  components: { TRecommendTitle },
-  setup() {
-    onMounted(() => {
-      getTopList(19723756).then((res) => {
-        console.log(res)
-      })
-    })
-  }
+  components: { TRecommendTitle, TTopRanking },
+  setup() {}
 })
 </script>
 

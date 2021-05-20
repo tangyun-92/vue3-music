@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 10:43:01 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:52:35
+ * @Last Modified time: 2021-05-20 13:43:09
  * 发现音乐-热门推荐
  */
 
@@ -48,14 +48,11 @@ export function getNewAlbums(limit) {
  * 获取榜单列表
  * @param idx 榜单id
  */
-export function getTopList(id) {
+export function getTopList(idx) {
   return request({
-    url: '/playlist/detail',
+    url: '/top/list',
     params: {
-      id
+      idx
     }
   })
 }
-// 19723756
-// 3779629
-// 2884035

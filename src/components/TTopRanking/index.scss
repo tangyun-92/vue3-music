@@ -1,3 +1,127 @@
+@import '@/styles/mixin.scss';
 .top-ranking {
-  
+  width: 230px;
+
+  .top {
+    height: 100px;
+    padding: 20px 0 0 20px;
+    display: flex;
+
+    .cover {
+      width: 80px;
+      height: 80px;
+      position: relative;
+
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position: -145px -57px;
+      }
+    }
+
+    .tit {
+      width: 116px;
+      margin: 6px 0 0 10px;
+
+      .name {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .btn {
+        margin: 10px 0 0 0;
+        display: flex;
+
+        div {
+          cursor: pointer;
+          width: 22px;
+          height: 22px;
+          margin-right: 10px;
+        }
+
+        .play {
+          background-position: -267px -205px;
+        }
+
+        .col {
+          background-position: -300px -205px;
+        }
+      }
+    }
+  }
+
+  ul {
+    height: 320px;
+    margin: 21px 0 0 10px;
+    line-height: 32px;
+
+    .list-item {
+      position: relative;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      &:nth-child(-n + 3) .rank {
+        color: #c10d0c;
+      }
+
+      .rank {
+        width: 35px;
+        text-align: center;
+        margin-left: 10px;
+        font-size: 16px;
+      }
+
+      .song {
+        color: #000;
+        width: 170px;
+        height: 17px;
+        line-height: 17px;
+        display: flex;
+        justify-content: space-between;
+
+        .name {
+          flex: 1;
+        }
+
+        .operate {
+          display: flex;
+          align-items: center;
+          display: none;
+          width: 82px;
+
+          .btn {
+            width: 17px;
+            height: 17px;
+            margin-left: 8px;
+            cursor: pointer;
+          }
+
+          .play {
+            background-position: -267px -268px;
+          }
+
+          .addto {
+            position: relative;
+            top: 2px;
+            background-position: 0 -700px;
+          }
+
+          .favor {
+            background-position: -297px -268px;
+          }
+        }
+      }
+
+      &:hover {
+        .operate {
+          display: block;
+        }
+      }
+    }
+  }
 }
