@@ -1,0 +1,68 @@
+@import '@/styles/mixin.scss';
+.songs-cover {
+  width: 140px;
+  height: 204px;
+  line-height: 1.4;
+  margin-bottom: 30px;
+
+  .cover {
+    width: 140px;
+    height: 140px;
+    position: relative;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .msk {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: 0 0;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 27px;
+      background-position: 0 -537px;
+      color: #ccc;
+      @include flex();
+
+      .info {
+        .icon {
+          width: 14px;
+          height: 11px;
+          background-position: 0 -24px;
+          margin: 0 5px 0 10px;
+        }
+      }
+
+      .play {
+        margin: 0 10px 0 0;
+        width: 16px;
+        height: 17px;
+        background-position: 0 0;
+        display: inline-block;
+      }
+    }
+  }
+
+  .des {
+    margin: 8px 0 3px;
+    font-size: 14px;
+
+    .tit {
+      display: inline-block;
+      max-width: 100%;
+      vertical-align: middle;
+      color: #000;
+    }
+  }
+}

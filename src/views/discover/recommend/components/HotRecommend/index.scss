@@ -1,0 +1,8 @@
+@import '@/styles/mixin.scss';
+.hot-recommend {
+  .list {
+    @include flex();
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+}

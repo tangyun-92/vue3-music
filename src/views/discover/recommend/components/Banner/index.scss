@@ -1,0 +1,75 @@
+.ant-carousel :deep(.slick-slide) {
+  width: 730px;
+  text-align: center;
+  height: 285px;
+  background: #364d79;
+  overflow: hidden;
+
+  img {
+    width: 730px;
+    height: 285px;
+  }
+}
+
+.ant-carousel :deep(.slick-dots) li button {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin: 0 7px;
+}
+
+.wrap-banner {
+  position: relative;
+  width: 982px;
+  height: 285px;
+  margin: 0 auto;
+
+  .banner {
+    width: 730px;
+    height: 285px;
+
+    .btn {
+      display: block;
+      position: absolute;
+      top: 50%;
+      margin-top: -31px;
+      width: 37px;
+      height: 63px;
+    }
+
+    .btn-prev {
+      background-position: 0 -360px;
+      left: -68px;
+    }
+
+    .btn-next {
+      background-position: 0 -508px;
+      right: -68px;
+    }
+  }
+
+  .download {
+    position: absolute;
+    top: 0;
+    right: -1px;
+    z-index: 20;
+    width: 254px;
+    height: 285px;
+    background: url(../../../../../assets/img/download.png);
+
+    a {
+      display: block;
+      width: 215px;
+      height: 56px;
+      margin: 186px 0 0 19px;
+      background-position: 0 9999px;
+      text-indent: -9999px;
+    }
+
+    p {
+      margin: 10px auto;
+      text-align: center;
+      color: #8d8d8d;
+    }
+  }
+}

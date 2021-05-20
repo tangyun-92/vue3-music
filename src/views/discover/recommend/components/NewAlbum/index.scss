@@ -1,0 +1,16 @@
+@import '@/styles/mixin.scss';
+.new-album {
+  .list {
+    height: 186px;
+    margin: 20px 0 37px;
+    border: 1px solid #d3d3d3;
+
+    .list-item {
+      @include flex();
+      height: 184px;
+      padding: 0 12px;
+      background: #f5f5f5;
+      border: 1px solid #fff;
+    }
+  }
+}
