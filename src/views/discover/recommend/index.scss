@@ -6,13 +6,37 @@
   background-color: #fff;
 
   .wrap-left {
-    width: 730px;
+    width: 731px;
     height: auto;
     border-right: 1px solid #d3d3d3;
     padding: 20px 20px 40px;
   }
 
   .wrap-right {
+    width: 250px;
 
+    .user-login {
+      height: 126px;
+      background-position: 0 0;
+
+      .note {
+        width: 205px;
+        margin: 0 auto;
+        padding: 16px 0;
+        line-height: 22px;
+      }
+
+      .btn {
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+        height: 31px;
+        line-height: 31px;
+        text-align: center;
+        color: #fff;
+        text-shadow: 0 1px 0 #8a060b;
+        background-position: 0 -195px;
+      }
+    }
   }
 }

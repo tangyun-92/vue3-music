@@ -46,7 +46,7 @@ const request = (requestObj) => {
     url,
     method: method || 'post',
     data,
-    timeout: timeout || 10000,
+    timeout: timeout || 20000,
     params,
   })
 }

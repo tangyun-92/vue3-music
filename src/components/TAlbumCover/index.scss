@@ -3,6 +3,12 @@
     margin-bottom: 7px;
     position: relative;
 
+    &:hover {
+      .play {
+        display: block;
+      }
+    }
+
     img {
       display: block;
       width: 100%;
@@ -13,6 +19,16 @@
       position: absolute;
       top: 0;
       left: 0;
+    }
+
+    .play {
+      width: 22px;
+      height: 22px;
+      display: none;
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      background-position: 0 -85px;
     }
   }
 

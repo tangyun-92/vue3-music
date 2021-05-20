@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 15:08:24 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:53:12
+ * @Last Modified time: 2021-05-20 16:13:20
  专辑封面组件
  */
 <template>
@@ -18,6 +18,7 @@
           backgroundPosition: +'0' + size.bgp
         }"
       ></a>
+      <a href="#" class="play sprite_icon"></a>
     </div>
     <p class="title text-nowrap">{{ data.name }}</p>
     <p class="name text-nowrap">{{ data.artist.name }}</p>

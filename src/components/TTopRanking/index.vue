@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-20 09:16:00 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 14:48:08
+ * @Last Modified time: 2021-05-20 16:09:26
  发现音乐-榜单组件
  */
 <template>
@@ -33,6 +33,9 @@
         </div>
       </li>
     </ul>
+    <div class="more">
+      <a href="#">查看全部></a>
+    </div>
   </div>
 </template>
 
