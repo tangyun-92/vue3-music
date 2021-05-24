@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-21 11:03:23 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 10:49:50
+ * @Last Modified time: 2021-05-24 15:41:20
  音乐播放器
  */
 <template>
@@ -59,10 +59,7 @@
             @click="changeSequence"
             :style="{ backgroundPosition: sequenceIcon }"
           ></button>
-          <button
-            class="sprite_playbar btn playlist"
-            @click="handlePlayList"
-          >
+          <button class="sprite_playbar btn playlist" @click="handlePlayList">
             {{ playList.length }}
           </button>
         </div>
@@ -83,6 +80,7 @@ import { formatDate, getPlaySong, getSizeImage } from '@/utils/format-utils'
 import { useStore } from 'vuex'
 import { message } from 'ant-design-vue'
 import PlayList from './components/play-list'
+import useChangeCurrentSong from '@/hooks/useChangeCurrentSong'
 
 export default defineComponent({
   name: 'Player',
@@ -107,11 +105,21 @@ export default defineComponent({
     // 是否显示播放列表
     const isPlayListStore = computed({
       get: () => store.state.player.isPlayList,
-      set: val => {
+      set: (val) => {
         isPlayList.value = val
       }
     })
-    // 监听播放方式按钮
+    // 歌曲总时长
+    const duration = computed(() => currentSong.value.dt || 0)
+    // 歌手
+    const singerName = computed(
+      () => (currentSong.value.ar && currentSong.value.ar[0].name) || ''
+    )
+    // 歌曲图片
+    const picUrl = computed(
+      () => (currentSong.value.al && currentSong.value.al.picUrl) || ''
+    )
+    // 播放方式按钮
     const sequenceIcon = computed(() => {
       switch (sequence.value) {
         case 1:
@@ -122,7 +130,7 @@ export default defineComponent({
           return '-3px -344px'
       }
     })
-    // 监听播放与暂停按钮
+    // 播放与暂停按钮
     const isPlayOrPause = computed(() => {
       if (isPlaying.value) {
         return '0 -165px'
@@ -131,20 +139,21 @@ export default defineComponent({
       }
     })
 
+    onMounted(() => {
+      audioRef.value.src = getPlaySong(currentSong.value.id)
+    })
+
     // 监听是否显示播放列表
     watch(isPlayListStore, (newVal) => {
       isPlayList.value = newVal
       store.commit('player/SET_IS_PLAY_LIST', newVal)
     })
-
-    const duration = currentSong.value.dt || 0 // 歌曲总时长
-    const singerName =
-      (currentSong.value.ar && currentSong.value.ar[0].name) || '' // 歌手
-    const picUrl = (currentSong.value.al && currentSong.value.al.picUrl) || '' // 歌曲图片
-
-    onMounted(() => {
+    // 监听歌曲改变
+    watch(currentSong, () => {
       audioRef.value.src = getPlaySong(currentSong.value.id)
-      // audioRef.value.play()
+      audioRef.value.play().then(() => {
+        isPlaying.value = true
+      })
     })
 
     /**
@@ -173,9 +182,8 @@ export default defineComponent({
      * 改变进度条时
      */
     const sliderChange = (val) => {
-      console.log(val)
       progress.value = val
-      const newCurrentTime = (val / 100.0) * duration
+      const newCurrentTime = (val / 100.0) * duration.value
       currentTime.value = newCurrentTime
       isChanging.value = true
     }
@@ -183,7 +191,7 @@ export default defineComponent({
      * 进度条改变后
      */
     const sliderAfterChange = (val) => {
-      const newCurrentTime = ((val / 100) * duration) / 1000 // 进度条改变后的时间
+      const newCurrentTime = ((val / 100) * duration.value) / 1000 // 进度条改变后的时间
       audioRef.value.currentTime = newCurrentTime
       currentTime.value = newCurrentTime * 1000
       isChanging.value = false
@@ -200,7 +208,7 @@ export default defineComponent({
       // 乘以1000转为毫秒
       if (!isChanging.value) {
         currentTime.value = newCurrentTime * 1000
-        progress.value = ((newCurrentTime * 1000) / duration) * 100
+        progress.value = ((newCurrentTime * 1000) / duration.value) * 100
       }
     }
     /**
@@ -213,14 +221,14 @@ export default defineComponent({
         audioRef.value.play()
       } else {
         // 自动切歌
-        store.dispatch('player/changeCurrentSong', 1)
+        useChangeCurrentSong(store, 1)
       }
     }
     /**
      * 切歌
      */
     const changeMusic = (tag) => {
-      store.dispatch('player/changeCurrentSong', tag)
+      useChangeCurrentSong(store, tag)
     }
     /**
      * 改变播放列表显示/隐藏状态

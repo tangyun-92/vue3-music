@@ -2,14 +2,14 @@
  * @Author: 唐云 
  * @Date: 2021-05-20 09:16:00 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 16:09:26
+ * @Last Modified time: 2021-05-24 15:34:36
  发现音乐-榜单组件
  */
 <template>
   <div class="top-ranking">
     <div class="top">
       <div class="cover">
-        <img :src="getSizeImage(list.coverImgUrl, 80)" :alt="list.name">
+        <img :src="getSizeImage(list.coverImgUrl, 80)" :alt="list.name" />
         <a href="#" class="mask sprite_cover"></a>
       </div>
       <div class="tit">
@@ -26,8 +26,14 @@
         <div class="song">
           <div class="name text-nowrap">{{ item.name }}</div>
           <div class="operate">
-            <button class="btn sprite_02 play"></button>
-            <button class="btn sprite_icon2 addto"></button>
+            <button
+              class="btn sprite_02 play"
+              @click="playMusic(item)"
+            ></button>
+            <button
+              class="btn sprite_icon2 addto"
+              @click="addToPlayList(item)"
+            ></button>
             <button class="btn sprite_02 favor"></button>
           </div>
         </div>
@@ -43,8 +49,10 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import { getTopList } from '@/api/discover/recommend'
 import { getSizeImage } from '@/utils/format-utils'
+import { useStore } from 'vuex'
+import useAddSongToPlayList from '@/hooks/useAddSongToPlayList'
 
-export default defineComponent ({
+export default defineComponent({
   name: 'TTopRanking',
   props: {
     id: {
@@ -55,22 +63,39 @@ export default defineComponent ({
     }
   },
   setup(props) {
+    const store = useStore()
     const list = ref([])
+
     onMounted(() => {
-      getTopList(props.id).then(res => {
+      getTopList(props.id).then((res) => {
         list.value = res.playlist
         list.value.tracks = list.value.tracks.slice(0, 10)
       })
     })
 
+    /**
+     * 播放音乐
+     */
+    const playMusic = (item) => {
+      useAddSongToPlayList(store, item.id)
+    }
+    /**
+     * 添加到播放列表
+     */
+    const addToPlayList = (item) => {
+      useAddSongToPlayList(store, item.id, 'add')
+    }
+
     return {
       list,
-      getSizeImage
+      getSizeImage,
+      playMusic,
+      addToPlayList
     }
   }
 })
 </script>
 
 <style lang='scss' scoped>
-@import './index.scss'
+@import './index.scss';
 </style>

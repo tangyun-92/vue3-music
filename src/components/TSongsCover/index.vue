@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 09:50:42 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:54:11
+ * @Last Modified time: 2021-05-24 16:11:29
  歌曲封面组件
  */
 <template>
@@ -15,7 +15,7 @@
           <span class="icon sprite_icon"></span>
           <span class="num">{{ getCount(list.playCount) }}</span>
         </div>
-        <a class="play sprite_icon"></a>
+        <a class="play sprite_icon" @click="playMusic(list.id)"></a>
       </div>
     </div>
     <div class="des">
@@ -27,6 +27,8 @@
 <script>
 import { computed, defineComponent } from 'vue'
 import { getCount, getSizeImage } from '@/utils/format-utils'
+import { useStore } from 'vuex'
+import useAddPlayListToPlayList from '@/hooks/useAddPlayListToPlayList'
 
 export default defineComponent({
   name: 'SongsCover',
@@ -37,12 +39,19 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const store = useStore()
     const list = computed(() => props.data)
+
+    const playMusic = (id) => {
+      store.commit('SET_PLAY_LIST', [])
+      useAddPlayListToPlayList(store, id, 'addAndPlay')
+    }
 
     return {
       list,
       getCount,
-      getSizeImage
+      getSizeImage,
+      playMusic
     }
   }
 })

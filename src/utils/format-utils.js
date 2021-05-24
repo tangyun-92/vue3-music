@@ -60,6 +60,22 @@ function padLeftZero(str) {
 }
 
 /**
+ * 月份格式化
+ * @param {*} time 时间
+ */
+export function formatMonthDay(time) {
+  return formatDate(time, 'MM月dd日')
+}
+
+/**
+ * 分钟秒数格式化
+ * @param {*} time 
+ */
+export function formatMinuteSecond(time) {
+  return formatDate(time, 'mm:ss')
+}
+
+/**
  * 获取播放歌曲的链接
  * @param {*} id id
  */

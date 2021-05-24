@@ -2,11 +2,11 @@
  * @Author: 唐云
  * @Date: 2021-05-21 14:06:30
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-21 17:28:07
+ * @Last Modified time: 2021-05-24 16:08:52
  * 播放器
  */
-
-import { getRandomNumber } from '@/utils/math.utils'
+import { parseLyric } from '@/utils/parse-lyric'
+import { getLyric } from '@/api/player'
 
 // import { getTopList } from '@/api/discover/recommend'
 
@@ -96,21 +96,16 @@ const mutations = {
 }
 
 const actions = {
-  // getSurgeRanking({ commit }, id) {
-  //   getTopList(id).then((res) => {
-  //     commit('GET_SURGE_RANKING', res.playlist)
-  //   })
-  // },
   /**
    * 切歌
    * @param {*} tag 0-顺序播放 1-随机播放 2-单曲循环
    */
-  changeCurrentSong({ commit }, tag) {
+  /* changeCurrentSong({ commit }, tag) {
     const sequence = state.sequence
     const playList = state.playList
     let currentSongIndex = state.currentSongIndex
     let randomIndex = getRandomNumber(playList.length)
-    
+
     switch (sequence) {
       case 1: // 随机播放
         while (randomIndex === currentSongIndex) {
@@ -134,7 +129,84 @@ const actions = {
     commit('SET_CURRENT_SONG_INDEX', currentSongIndex)
     commit('SET_CURRENT_SONG', currentSong)
     // 获取歌词
-    
+    commit('SET_LYRIC_LIST', currentSong.id)
+  }, */
+  /**
+   * 将歌曲添加到播放列表并播放
+   * @param {*} ids 歌曲id
+   * @param {*} way add-添加到列表 addAndPlay-添加到列表并播放
+   */
+  /* getSongToPlayList({ commit, dispatch }, ids, way = 'addAndPlay') {
+    const playList = state.playList
+    const songIndex = playList.findIndex((song) => song.id === ids)
+
+    // 判断是否找到歌曲
+    let song = null
+    if (songIndex !== -1) {
+      // 找到
+      commit('SET_CURRENT_SONG_INDEX', songIndex)
+      song = playList[songIndex]
+      commit('SET_CURRENT_SONG', song)
+      // 请求歌曲的歌词
+      dispatch('getLyricAction', song.id)
+    } else {
+      // 没找到，请求歌曲数据
+      getSongDetail(ids).then((res) => {
+        song = res.songs && res.songs[0]
+        if (!song) return
+        // 将请求到的歌曲放入播放列表
+        const newPlayList = [...playList]
+        newPlayList.push(song)
+        console.log(newPlayList)
+        // 更新播放列表
+        commit('SET_PLAY_LIST', newPlayList)
+        if (way !== 'add') {
+          // 更新正在播放歌曲的索引
+          commit('SET_CURRENT_SONG_INDEX', newPlayList.length - 1)
+          // 更新正在播放的歌曲
+          commit('SET_CURRENT_SONG', song)
+          // 请求歌曲的歌词
+          dispatch('getLyricAction', song.id)
+        }
+      })
+    }
+  }, */
+  /**
+   * 根据歌单id获取歌单详情-放入列表并播放
+   * @param {*} id 歌单id
+   * @param {*} way add-添加到列表 addAndPlay-添加到列表并播放
+   */
+  /* getPlayListDetailToPlayList({ commit, dispatch }, id, way = 'addAndPlay') {
+    const playList = state.playList
+
+    getPlayListDetail(id).then((response) => {
+      const trackIds = response.playlist.trackIds
+      trackIds.forEach((item, index) => {
+        getSongDetail(item.id).then((res) => {
+          const song = res.songs && res.songs[0]
+          if (!song) return
+          playList.push(song)
+          commit('SET_PLAY_LIST', playList)
+          if (way !== 'add') {
+            // 默认播放第一首
+            if (index === 0) {
+              dispatch('getSongToPlayList', playList[0].id, 'addAndPlay')
+            }
+          }
+        })
+      })
+    })
+  }, */
+  /**
+   * 获取歌词并解析
+   * @param {*} id 歌曲id
+   */
+  getLyricAction({ commit }, id) {
+    getLyric(id).then((res) => {
+      const lyric = res.lrc.lyric
+      const lyricList = parseLyric(lyric)
+      commit('SET_LYRIC_LIST', lyricList)
+    })
   },
 }
 
