@@ -20,8 +20,7 @@ export default createStore({
           sequence: state.player.sequence,
           currentSong: state.player.currentSong,
           currentSongIndex: state.player.currentSongIndex,
-          lyricList: state.player.lyricList,
-          currentLyricIndex: state.player.currentLyricIndex
+          lyricList: state.player.lyricList
         }
       }
     }

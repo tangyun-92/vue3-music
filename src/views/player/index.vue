@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-21 11:03:23 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 15:41:20
+ * @Last Modified time: 2021-05-24 17:42:04
  音乐播放器
  */
 <template>
@@ -98,6 +98,10 @@ export default defineComponent({
 
     // 播放列表
     const playList = computed(() => store.state.player.playList)
+    // 歌词列表
+    const lyricList = computed(() => store.state.player.lyricList)
+    // 当前歌词的索引
+    const currentLyricIndex = computed(() => store.state.player.currentLyricIndex)
     // 播放方式
     const sequence = computed(() => store.state.player.sequence)
     // 播放器选中的歌曲
@@ -210,6 +214,19 @@ export default defineComponent({
         currentTime.value = newCurrentTime * 1000
         progress.value = ((newCurrentTime * 1000) / duration.value) * 100
       }
+
+      // 获取当前的歌词
+      let i = 0
+      for (; i < lyricList.value.length; i++) {
+        let lyricItem = lyricList.value[i]
+        if (newCurrentTime * 1000 < lyricItem.time) {
+          break
+        }
+      }
+      const finalIndex = i - 1
+      if (finalIndex !== currentLyricIndex.value) {
+        store.commit('player/SET_CURRENT_LYRIC_INDEX', finalIndex)
+      }
     }
     /**
      * 歌曲播放完毕时
@@ -234,7 +251,6 @@ export default defineComponent({
      * 改变播放列表显示/隐藏状态
      */
     const handlePlayList = () => {
-      // console.log(isPlayListStore.value)
       isPlayList.value = !isPlayListStore.value
       store.commit('player/SET_IS_PLAY_LIST', isPlayList.value)
     }

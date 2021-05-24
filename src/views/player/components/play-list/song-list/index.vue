@@ -2,12 +2,12 @@
  * @Author: 唐云 
  * @Date: 2021-05-24 10:55:19 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 15:49:53
+ * @Last Modified time: 2021-05-24 16:20:36
  播放列表-歌曲列表组件
  */
 <template>
   <div class="song-list">
-    <div class="have-song">
+    <div class="have-song"  v-if="playList.length > 0">
       <div
         class="song-list"
         :class="{ active: currentSongIndex === index }"
@@ -35,7 +35,7 @@
         </span>
       </div>
     </div>
-    <div class="no-song">
+    <div class="no-song" v-else>
       <i class="icon sprite_playlist"></i>
       你还没有添加任何歌曲
       <br />

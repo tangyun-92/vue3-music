@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-24 09:24:44 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 10:32:43
+ * @Last Modified time: 2021-05-24 16:19:16
  播放列表头部组件
  */
 <template>
@@ -58,6 +58,7 @@ export default defineComponent({
      */
     const confirm = () => {
       message.success('清空成功！')
+      store.commit('player/SET_PLAY_LIST', [])
     }
 
     return {
