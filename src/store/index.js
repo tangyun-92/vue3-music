@@ -15,7 +15,14 @@ export default createStore({
     reducer(state) {
       return {
         // 持久存储
-        player: state.player
+        player: {
+          playList: state.player.playList,
+          sequence: state.player.sequence,
+          currentSong: state.player.currentSong,
+          currentSongIndex: state.player.currentSongIndex,
+          lyricList: state.player.lyricList,
+          currentLyricIndex: state.player.currentLyricIndex
+        }
       }
     }
   })]

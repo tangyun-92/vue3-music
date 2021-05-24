@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-21 11:03:23 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-21 17:12:22
+ * @Last Modified time: 2021-05-24 10:49:50
  音乐播放器
  */
 <template>
@@ -62,7 +62,9 @@
           <button
             class="sprite_playbar btn playlist"
             @click="handlePlayList"
-          ></button>
+          >
+            {{ playList.length }}
+          </button>
         </div>
       </div>
     </div>
@@ -71,17 +73,22 @@
       @timeupdate="timeUpdate"
       @ended="handleMusicEnded"
     ></audio>
+    <play-list v-show="isPlayList" />
   </div>
 </template>
 
 <script>
-import { computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import { formatDate, getPlaySong, getSizeImage } from '@/utils/format-utils'
 import { useStore } from 'vuex'
 import { message } from 'ant-design-vue'
+import PlayList from './components/play-list'
 
 export default defineComponent({
   name: 'Player',
+  components: {
+    PlayList
+  },
   setup() {
     const store = useStore()
     const currentTime = ref(0) // 播放中的时间
@@ -89,13 +96,21 @@ export default defineComponent({
     const isChanging = ref(false) // 是否正在改变进度条
     const isPlaying = ref(false) // 播放状态
     const audioRef = ref()
+    const isPlayList = ref(false) // 是否显示播放列表
 
+    // 播放列表
+    const playList = computed(() => store.state.player.playList)
     // 播放方式
     const sequence = computed(() => store.state.player.sequence)
     // 播放器选中的歌曲
     const currentSong = computed(() => store.state.player.currentSong)
     // 是否显示播放列表
-    const isPlayList = computed(() => store.state.player.isPlayList)
+    const isPlayListStore = computed({
+      get: () => store.state.player.isPlayList,
+      set: val => {
+        isPlayList.value = val
+      }
+    })
     // 监听播放方式按钮
     const sequenceIcon = computed(() => {
       switch (sequence.value) {
@@ -114,6 +129,12 @@ export default defineComponent({
       } else {
         return '0 -204px'
       }
+    })
+
+    // 监听是否显示播放列表
+    watch(isPlayListStore, (newVal) => {
+      isPlayList.value = newVal
+      store.commit('player/SET_IS_PLAY_LIST', newVal)
     })
 
     const duration = currentSong.value.dt || 0 // 歌曲总时长
@@ -205,7 +226,8 @@ export default defineComponent({
      * 改变播放列表显示/隐藏状态
      */
     const handlePlayList = () => {
-      isPlayList.value = !isPlayList.value
+      // console.log(isPlayListStore.value)
+      isPlayList.value = !isPlayListStore.value
       store.commit('player/SET_IS_PLAY_LIST', isPlayList.value)
     }
 
@@ -230,7 +252,8 @@ export default defineComponent({
       handleMusicEnded,
       changeMusic,
       isPlayList,
-      handlePlayList
+      handlePlayList,
+      playList
     }
   }
 })

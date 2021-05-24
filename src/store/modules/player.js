@@ -2,9 +2,11 @@
  * @Author: 唐云
  * @Date: 2021-05-21 14:06:30
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-21 17:14:44
+ * @Last Modified time: 2021-05-21 17:28:07
  * 播放器
  */
+
+import { getRandomNumber } from '@/utils/math.utils'
 
 // import { getTopList } from '@/api/discover/recommend'
 
@@ -99,10 +101,40 @@ const actions = {
   //     commit('GET_SURGE_RANKING', res.playlist)
   //   })
   // },
-  // 切歌
-  changeCurrentSong({commit}, tag) {
-    console.log(commit)
-    console.log(tag)
+  /**
+   * 切歌
+   * @param {*} tag 0-顺序播放 1-随机播放 2-单曲循环
+   */
+  changeCurrentSong({ commit }, tag) {
+    const sequence = state.sequence
+    const playList = state.playList
+    let currentSongIndex = state.currentSongIndex
+    let randomIndex = getRandomNumber(playList.length)
+    
+    switch (sequence) {
+      case 1: // 随机播放
+        while (randomIndex === currentSongIndex) {
+          randomIndex = getRandomNumber(playList.length)
+        }
+        currentSongIndex = randomIndex
+        break
+      default:
+        // 顺序播放
+        currentSongIndex += tag
+        if (currentSongIndex >= playList.length) {
+          currentSongIndex = 0
+        }
+        if (currentSongIndex < 0) {
+          currentSongIndex = playList.length - 1
+        }
+        break
+    }
+
+    const currentSong = playList[currentSongIndex]
+    commit('SET_CURRENT_SONG_INDEX', currentSongIndex)
+    commit('SET_CURRENT_SONG', currentSong)
+    // 获取歌词
+    
   },
 }
 
