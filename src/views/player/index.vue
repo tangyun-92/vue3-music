@@ -2,11 +2,11 @@
  * @Author: 唐云 
  * @Date: 2021-05-21 11:03:23 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 17:42:04
+ * @Last Modified time: 2021-05-25 14:20:17
  音乐播放器
  */
 <template>
-  <div class="player sprite_playbar">
+  <div class="player sprite_playbar" ref="playerRef">
     <div class="content wrap-980">
       <div class="control">
         <button class="prev sprite_playbar" @click="changeMusic(-1)"></button>
@@ -81,6 +81,7 @@ import { useStore } from 'vuex'
 import { message } from 'ant-design-vue'
 import PlayList from './components/play-list'
 import useChangeCurrentSong from '@/hooks/useChangeCurrentSong'
+import useClickOutSide from '@/hooks/useClickOutSide'
 
 export default defineComponent({
   name: 'Player',
@@ -94,6 +95,7 @@ export default defineComponent({
     const isChanging = ref(false) // 是否正在改变进度条
     const isPlaying = ref(false) // 播放状态
     const audioRef = ref()
+    const playerRef = ref()
     const isPlayList = ref(false) // 是否显示播放列表
 
     // 播放列表
@@ -145,6 +147,15 @@ export default defineComponent({
 
     onMounted(() => {
       audioRef.value.src = getPlaySong(currentSong.value.id)
+    })
+
+    // 点击播放列表外，隐藏播放列表
+    const isClickOutSide = useClickOutSide(playerRef)
+    watch(isClickOutSide, () => {
+      if (isPlayList.value && isClickOutSide.value) {
+        isPlayList.value = false
+        store.commit('player/SET_IS_PLAY_LIST', false)
+      }
     })
 
     // 监听是否显示播放列表
@@ -256,6 +267,8 @@ export default defineComponent({
     }
 
     return {
+      isClickOutSide,
+      playerRef,
       audioRef,
       formatDate,
       currentTime,

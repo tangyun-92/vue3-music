@@ -2,12 +2,12 @@
  * @Author: 唐云 
  * @Date: 2021-05-21 11:09:00 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 09:29:04
+ * @Last Modified time: 2021-05-25 13:34:52
  播放列表组件
  */
 <template>
   <div class="play-list">
-    <div class="mask"></div>
+    <!-- <div class="mask"></div> -->
     <div class="container">
       <list-header />
       <div class="content">
