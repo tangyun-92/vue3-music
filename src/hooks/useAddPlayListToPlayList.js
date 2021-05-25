@@ -7,6 +7,7 @@ import useAddSongToPlayList from '@/hooks/useAddSongToPlayList'
  * @param {*} way add-添加到列表 addAndPlay-添加到列表并播放
  */
 function useAddPlayListToPlayList(store, id, way = 'addAndPlay') {
+  store.commit('player/SET_PLAY_LIST', [])
   const playList = store.state.player.playList
 
   getPlayListDetail(id).then((response) => {

@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 09:50:42 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 16:11:29
+ * @Last Modified time: 2021-05-25 17:07:24
  歌曲封面组件
  */
 <template>
@@ -28,7 +28,8 @@
 import { computed, defineComponent } from 'vue'
 import { getCount, getSizeImage } from '@/utils/format-utils'
 import { useStore } from 'vuex'
-import useAddPlayListToPlayList from '@/hooks/useAddPlayListToPlayList'
+import { getPlayListDetail } from '@/api/player'
+import useAddPlayList from '@/hooks/useAddPlayList'
 
 export default defineComponent({
   name: 'SongsCover',
@@ -43,8 +44,13 @@ export default defineComponent({
     const list = computed(() => props.data)
 
     const playMusic = (id) => {
-      store.commit('SET_PLAY_LIST', [])
-      useAddPlayListToPlayList(store, id, 'addAndPlay')
+      getPlayListDetail(id).then((res) => {
+        const trackIds = res.playlist.trackIds
+        useAddPlayList({
+          store,
+          ids: trackIds
+        })
+      })
     }
 
     return {

@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 15:08:24 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 16:13:20
+ * @Last Modified time: 2021-05-25 18:13:25
  专辑封面组件
  */
 <template>
@@ -10,7 +10,7 @@
     <div class="cover" :style="{ width: size.size, height: size.size }">
       <img :src="getSizeImage(data.picUrl, 150)" :alt="data.name" />
       <a
-        href=""
+        href="#"
         class="mask sprite_cover"
         :style="{
           width: size.width,
@@ -18,7 +18,7 @@
           backgroundPosition: +'0' + size.bgp
         }"
       ></a>
-      <a href="#" class="play sprite_icon"></a>
+      <span class="play sprite_icon" @click="playMusic"></span>
     </div>
     <p class="title text-nowrap">{{ data.name }}</p>
     <p class="name text-nowrap">{{ data.artist.name }}</p>
@@ -28,6 +28,9 @@
 <script>
 import { defineComponent } from 'vue'
 import { getSizeImage } from '@/utils/format-utils'
+import { getAlbumDetail } from '@/api/discover/album'
+import useAddPlayList from '@/hooks/useAddPlayList'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'TAlbumCover',
@@ -44,9 +47,23 @@ export default defineComponent({
       }
     }
   },
-  setup() {
+  setup(props) {
+    const store = useStore()
+    /**
+     * 播放音乐
+     */
+    const playMusic = () => {
+      getAlbumDetail(props.data.id).then((res) => {
+        useAddPlayList({
+          store,
+          songs: res.songs
+        })
+      })
+    }
+
     return {
-      getSizeImage
+      getSizeImage,
+      playMusic
     }
   }
 })

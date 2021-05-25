@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-20 09:16:00 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 15:34:36
+ * @Last Modified time: 2021-05-25 18:12:59
  发现音乐-榜单组件
  */
 <template>
@@ -15,7 +15,7 @@
       <div class="tit">
         <a href="" class="name">{{ list.name }}</a>
         <div class="btn">
-          <div class="play sprite_02"></div>
+          <div class="play sprite_02" @click="playMusicByRanking"></div>
           <div class="col sprite_02"></div>
         </div>
       </div>
@@ -50,7 +50,7 @@ import { defineComponent, onMounted, ref } from 'vue'
 import { getTopList } from '@/api/discover/recommend'
 import { getSizeImage } from '@/utils/format-utils'
 import { useStore } from 'vuex'
-import useAddSongToPlayList from '@/hooks/useAddSongToPlayList'
+import useAddPlayList from '@/hooks/useAddPlayList'
 
 export default defineComponent({
   name: 'TTopRanking',
@@ -74,23 +74,40 @@ export default defineComponent({
     })
 
     /**
+     * 将榜单中的歌曲添加到播放列表并播放
+     */
+    const playMusicByRanking = () => {
+      useAddPlayList({
+        store,
+        songs: list.value.tracks
+      })
+    }
+    /**
      * 播放音乐
      */
     const playMusic = (item) => {
-      useAddSongToPlayList(store, item.id)
+      useAddPlayList({
+        store,
+        id: item.id
+      })
     }
     /**
      * 添加到播放列表
      */
     const addToPlayList = (item) => {
-      useAddSongToPlayList(store, item.id, 'add')
+      useAddPlayList({
+        store,
+        id: item.id,
+        way: 'add'
+      })
     }
 
     return {
       list,
       getSizeImage,
       playMusic,
-      addToPlayList
+      addToPlayList,
+      playMusicByRanking
     }
   }
 })
