@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 09:50:42 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-25 17:07:24
+ * @Last Modified time: 2021-05-26 11:18:50
  歌曲封面组件
  */
 <template>
@@ -48,7 +48,7 @@ export default defineComponent({
         const trackIds = res.playlist.trackIds
         useAddPlayList({
           store,
-          ids: trackIds
+          songs: trackIds
         })
       })
     }
