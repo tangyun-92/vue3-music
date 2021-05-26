@@ -2,12 +2,12 @@
  * @Author: 唐云 
  * @Date: 2021-05-24 10:55:19 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-25 16:46:47
+ * @Last Modified time: 2021-05-26 11:23:01
  播放列表-歌曲列表组件
  */
 <template>
   <div class="song-list">
-    <div class="have-song"  v-if="playList.length > 0">
+    <div class="have-song" v-if="playList.length > 0">
       <div
         class="song-list"
         :class="{ active: currentSongIndex === index }"
@@ -56,7 +56,8 @@
 import { useStore } from 'vuex'
 import { computed, defineComponent } from 'vue'
 import { formatMinuteSecond } from '@/utils/format-utils'
-import useAddSongToPlayList from '@/hooks/useAddSongToPlayList'
+// import useAddSongToPlayList from '@/hooks/useAddSongToPlayList'
+import useAddPlayList from '@/hooks/useAddPlayList'
 
 export default defineComponent({
   name: 'PlayListSongList',
@@ -77,7 +78,10 @@ export default defineComponent({
      * 播放列表中的音乐
      */
     const playMusic = (item) => {
-      useAddSongToPlayList(store, item.id, 'addAndPlay')
+      useAddPlayList({
+        store,
+        id: item.id
+      })
     }
     /**
      * 删除列表中的歌曲
@@ -92,7 +96,11 @@ export default defineComponent({
           if (item.id !== playingId) {
             newPlayList.splice(index, 1)
             store.commit('player/SET_PLAY_LIST', newPlayList)
-            useAddSongToPlayList(store, playingId, 'add')
+            useAddPlayList({
+              store,
+              id: playingId,
+              way: 'add'
+            })
           } else {
             // 如果删除正在播放的歌曲
             newPlayList.splice(index, 1)

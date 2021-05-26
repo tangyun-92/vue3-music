@@ -17,12 +17,7 @@ function useAddPlayList({ store, songs, id, way = 'addAndPlay' }) {
     store.commit('player/SET_PLAY_LIST', [])
     playList = store.state.player.playList
     songs.forEach((item, index) => {
-      handleSongDetail({
-        store,
-        index,
-        id: item.id,
-        way
-      })
+      handleSongDetail({ store, index, id: item.id, way })
     })
   } else {
     playList = store.state.player.playList
@@ -33,12 +28,7 @@ function useAddPlayList({ store, songs, id, way = 'addAndPlay' }) {
       song = playList[songIndex]
       handleStoreData(store, song, songIndex)
     } else {
-      handleSongDetail({
-        store,
-        song,
-        id,
-        way
-      })
+      handleSongDetail({ store, id, way })
     }
   }
 }
