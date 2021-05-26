@@ -101,6 +101,10 @@ button {
   background: url(../assets/img/sprite_02.png) no-repeat 0 9999px;
 }
 
+.sprite_03 {
+  background: url(../assets/img/sprite_03.png) no-repeat 0 9999px;
+}
+
 .sprite_cover {
   background: url(../assets/img/sprite_cover.png) no-repeat 0 9999px;
 }

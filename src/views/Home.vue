@@ -1,9 +1,10 @@
 <template>
   <div>
-    <t-header></t-header>
+    <t-header />
     <router-view></router-view>
-    <t-footer></t-footer>
-    <t-player></t-player>
+    <t-footer />
+    <t-player />
+    <t-back-top />
   </div>
 </template>
 
@@ -12,13 +13,15 @@ import { defineComponent } from 'vue'
 import THeader from '@/components/THeader'
 import TFooter from '@/components/TFooter'
 import TPlayer from '@/views/player'
+import TBackTop from '@/components/TBackTop'
 
 export default defineComponent({
   name: 'Home',
   components: {
     THeader,
     TFooter,
-    TPlayer
+    TPlayer,
+    TBackTop
   }
 })
 </script>
