@@ -1,4 +1,5 @@
 import { getSongDetail } from '@/api/player'
+import { message } from 'ant-design-vue'
 
 /**
  * 将歌曲添加到播放列表
@@ -14,6 +15,11 @@ function useAddPlayList({ store, songs, id, way = 'addAndPlay' }) {
   let song = null
   let songIndex = 0
   if (songs) {
+    if (way === 'add') {
+      message.success('已添加')
+    } else {
+      message.success('已添加并开始播放')
+    }
     store.commit('player/SET_PLAY_LIST', [])
     playList = store.state.player.playList
     songs.forEach((item, index) => {
@@ -25,9 +31,15 @@ function useAddPlayList({ store, songs, id, way = 'addAndPlay' }) {
     // 判断是否找到歌曲
     if (songIndex !== -1) {
       // 找到
+      message.success('歌曲已存在，已开始播放')
       song = playList[songIndex]
       handleStoreData(store, song, songIndex)
     } else {
+      if (way === 'add') {
+        message.success('已添加')
+      } else {
+        message.success('已开始播放')
+      }
       handleSongDetail({ store, id, way })
     }
   }

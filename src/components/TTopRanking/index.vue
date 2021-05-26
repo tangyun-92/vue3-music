@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-20 09:16:00 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-25 18:12:59
+ * @Last Modified time: 2021-05-26 14:10:13
  发现音乐-榜单组件
  */
 <template>
@@ -67,6 +67,7 @@ export default defineComponent({
     const list = ref([])
 
     onMounted(() => {
+      // 获取榜单列表
       getTopList(props.id).then((res) => {
         list.value = res.playlist
         list.value.tracks = list.value.tracks.slice(0, 10)

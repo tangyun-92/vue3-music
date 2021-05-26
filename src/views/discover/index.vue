@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-18 16:41:48 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:56:35
+ * @Last Modified time: 2021-05-26 15:24:44
  发现音乐
  */
 <template>
@@ -30,17 +30,21 @@
 import { computed, defineComponent } from 'vue'
 import { discoverMenu } from '@/common/local-data'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Discover',
   setup() {
     const route = useRoute() // 路由
+    const store = useStore()
     const isActive= computed(() => route.path) // 选中状态
     /**
      * nav导航点击事件
      */
     const handleClickNav = (link) => {
       isActive.value = link
+      store.commit('topList/SET_LIST_INDEX', 0)
+      store.commit('topList/SET_LIST_ID', 19723756)
     }
 
     return {

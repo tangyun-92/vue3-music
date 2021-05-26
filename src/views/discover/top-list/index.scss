@@ -1,0 +1,16 @@
+.top-list {
+  background-color: #fff;
+  display: flex;
+
+  .list-left {
+    width: 240px;
+    border: 1px solid #d3d3d3;
+    background-color: #f9f9f9;
+  }
+
+  .list-right {
+    width: 740px;
+    border-right: 1px solid #d3d3d3;
+    padding-bottom: 50px;
+  }
+}

@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 09:50:42 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-26 11:18:50
+ * @Last Modified time: 2021-05-26 14:09:59
  歌曲封面组件
  */
 <template>
@@ -43,6 +43,9 @@ export default defineComponent({
     const store = useStore()
     const list = computed(() => props.data)
 
+    /**
+     * 播放音乐
+     */
     const playMusic = (id) => {
       getPlayListDetail(id).then((res) => {
         const trackIds = res.playlist.trackIds

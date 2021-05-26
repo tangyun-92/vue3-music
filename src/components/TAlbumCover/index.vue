@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 15:08:24 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-25 18:13:25
+ * @Last Modified time: 2021-05-26 14:09:20
  专辑封面组件
  */
 <template>

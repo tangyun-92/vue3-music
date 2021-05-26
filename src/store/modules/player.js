@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-05-21 14:06:30
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-24 17:41:43
+ * @Last Modified time: 2021-05-26 15:28:41
  * 播放器
  */
 import { parseLyric } from '@/utils/parse-lyric'
@@ -50,7 +50,7 @@ const mutations = {
 
 const actions = {
   /**
-   * 获取歌词并解析
+   * 获取歌词并解析成数组
    * @param {*} id 歌曲id
    */
   getLyricAction({ commit }, id) {

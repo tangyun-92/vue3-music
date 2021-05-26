@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-17 15:34:30 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:53:33
+ * @Last Modified time: 2021-05-26 15:22:31
  头部组件
  */
 <template>
@@ -47,22 +47,28 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import { headerLinks } from '@/common/local-data'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'THeader',
   setup() {
     const route = useRoute() // 路由
+    const store = useStore()
     const isActive = ref(route.path) // 选中状态
+    
     onMounted(() => {
       if (route.path.indexOf('discover') !== -1) {
         return isActive.value = '/discover/recommend'
       }
     })
+    
     /**
      * nav导航点击事件
      */
     const handleClickNav = (link) => {
       isActive.value = link
+      store.commit('topList/SET_LIST_INDEX', 0)
+      store.commit('topList/SET_LIST_ID', 19723756)
     }
 
     return {
