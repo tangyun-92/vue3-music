@@ -155,6 +155,11 @@ button {
   background: url(../assets/img/sprite_cover.png) no-repeat -145px -57px;
 }
 
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /*修改滚动条样式*/
 div::-webkit-scrollbar {
   cursor: pointer;

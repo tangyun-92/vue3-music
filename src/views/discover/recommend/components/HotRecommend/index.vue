@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 13:39:08 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:55:28
+ * @Last Modified time: 2021-05-27 14:28:58
  热门推荐
  */
 <template>
@@ -13,6 +13,7 @@
         v-for="item in hotRecommendList"
         :key="item.id"
         :data="item"
+        :size="{ right: '0px', bottom: '0px' }"
       />
     </div>
   </div>

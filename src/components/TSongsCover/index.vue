@@ -2,11 +2,11 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 09:50:42 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-26 14:09:59
+ * @Last Modified time: 2021-05-27 14:28:52
  歌曲封面组件
  */
 <template>
-  <div class="songs-cover">
+  <div class="songs-cover" :style="{marginRight: size.right, marginBottom: size.bottom}">
     <div class="cover">
       <img :src="getSizeImage(list.picUrl || list.coverImgUrl, 140)" />
       <a class="msk sprite_cover" :title="list.name" href=""></a>
@@ -37,6 +37,15 @@ export default defineComponent({
     data: {
       type: Object,
       required: true
+    },
+    size: {
+      type: Object,
+      defaut() {
+        return {
+          right: '0px',
+          bottom: '20px'
+        }
+      }
     }
   },
   setup(props) {

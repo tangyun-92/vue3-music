@@ -1,12 +1,12 @@
+/*
+* @Author: 唐云
+* @Date: 2021-05-26 14:51:35
+ * @Last Modified by: 唐云
+ * @Last Modified time: 2021-05-27 11:27:37
+* 排行榜
+*/
 import { getAllTopList, getTopListDetail } from '@/api/discover/top-list'
 
-/*
- * @Author: 唐云
- * @Date: 2021-05-26 14:51:35
- * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-27 10:19:03
- * 排行榜
- */
 const getDefaultState = () => {
   return {
     cloudMusicTopList: [], // 云音乐榜单列表
