@@ -29,6 +29,18 @@
     }
 
     tbody {
+      tr {
+        &:hover {
+          .song-opera .opera {
+            display: flex;
+          }
+
+          .time {
+            display: none;
+          }
+        }
+      }
+
       td {
         padding: 6px 10px;
       }
@@ -73,14 +85,73 @@
           height: 17px;
           background-position: 0 -103px;
           cursor: pointer;
+          display: inline-table;
+
+          &:hover {
+            background-position: 0 -128px;
+          }
         }
 
         .name {
           margin-left: 10px;
           cursor: pointer;
-          
+
           &:hover {
             text-decoration: underline;
+          }
+        }
+      }
+
+      .time {
+        width: 86px;
+        display: block;
+      }
+
+      .song-opera {
+        width: 86px;
+        display: block;
+        
+        .opera {
+          display: none;
+          margin-top: 8px;
+
+          .btn {
+            width: 18px;
+            height: 16px;
+            margin-left: 4px;
+            cursor: pointer;
+          }
+
+          .add {
+            background-position: 0 -700px;
+
+            &:hover {
+              background-position: -22px -700px;
+            }
+          }
+
+          .collect {
+            background-position: 0 -174px;
+
+            &:hover {
+              background-position: -20px -174px;
+            }
+          }
+
+          .share {
+            background-position: 0 -195px;
+
+            &:hover {
+              background-position: -20px -195px;
+            }
+          }
+
+          .download {
+            background-position: -81px -174px;
+
+            &:hover {
+              background-position: -104px -174px;
+            }
           }
         }
       }

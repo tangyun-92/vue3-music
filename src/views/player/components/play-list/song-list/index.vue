@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-24 10:55:19 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-26 11:23:01
+ * @Last Modified time: 2021-05-27 10:06:23
  播放列表-歌曲列表组件
  */
 <template>
@@ -19,11 +19,12 @@
         <span class="song-name text-nowrap">{{ item.name }}</span>
         <span class="song-opera">
           <div class="opera">
-            <button class="btn collect sprite_playlist"></button>
-            <button class="btn share sprite_playlist"></button>
-            <button class="btn download sprite_playlist"></button>
+            <button class="btn collect sprite_playlist" title="收藏"></button>
+            <button class="btn share sprite_playlist" title="分享"></button>
+            <button class="btn download sprite_playlist" title="下载"></button>
             <button
               class="btn del sprite_playlist"
+              title="删除"
               @click="delSong(item.id, $event)"
             ></button>
           </div>

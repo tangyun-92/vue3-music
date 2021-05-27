@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-20 09:16:00 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-26 14:10:13
+ * @Last Modified time: 2021-05-27 10:07:40
  发现音乐-榜单组件
  */
 <template>
@@ -28,13 +28,15 @@
           <div class="operate">
             <button
               class="btn sprite_02 play"
+              title="播放"
               @click="playMusic(item)"
             ></button>
             <button
               class="btn sprite_icon2 addto"
+              title="添加到播放列表"
               @click="addToPlayList(item)"
             ></button>
-            <button class="btn sprite_02 favor"></button>
+            <button class="btn sprite_02 favor" title="收藏"></button>
           </div>
         </div>
       </li>

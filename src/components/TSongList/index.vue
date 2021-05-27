@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-26 16:54:46 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-26 17:21:43
+ * @Last Modified time: 2021-05-27 10:04:11
  歌曲组件列表
  */
 <template>
@@ -26,12 +26,27 @@
           </td>
           <td>
             <div class="song-name">
-              <img v-if="index < 3" :src="getSizeImage(item.al.picUrl, 50)" alt="">
-              <span class="play sprite_table" @click="playMusic(item.id)"></span>
+              <img
+                v-if="index < 3"
+                :src="getSizeImage(item.al.picUrl, 50)"
+                alt=""
+              />
+              <span
+                class="play sprite_table"
+                @click="playMusic(item.id)"
+              ></span>
               <span class="name">{{ item.name }}</span>
             </div>
           </td>
-          <td>{{ formatMinuteSecond(item.dt) }}</td>
+          <td class="time">{{ formatMinuteSecond(item.dt) }}</td>
+          <span class="song-opera">
+            <div class="opera">
+              <button class="btn add sprite_icon2" title="添加到播放列表" @click="addMusic(item.id)"></button>
+              <button class="btn collect sprite_table" title="收藏"></button>
+              <button class="btn share sprite_table" title="分享"></button>
+              <button class="btn download sprite_table" title="下载"></button>
+            </div>
+          </span>
           <td>{{ item.ar[0].name }}</td>
         </tr>
       </tbody>
@@ -45,7 +60,7 @@ import { getSizeImage, formatMinuteSecond } from '@/utils/format-utils'
 import useAddPlayList from '@/hooks/useAddPlayList'
 import { useStore } from 'vuex'
 
-export default defineComponent ({
+export default defineComponent({
   name: 'TSongList',
   props: {
     list: Array
@@ -62,11 +77,22 @@ export default defineComponent ({
         id
       })
     }
+    /**
+     * 添加到播放列表
+     */
+    const addMusic = (id) => {
+      useAddPlayList({
+        store,
+        id,
+        way: 'add'
+      })
+    }
 
     return {
       getSizeImage,
       formatMinuteSecond,
-      playMusic
+      playMusic,
+      addMusic
     }
   }
 })
