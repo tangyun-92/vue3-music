@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-21 11:03:23 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-25 14:20:17
+ * @Last Modified time: 2021-05-28 09:42:04
  音乐播放器
  */
 <template>
@@ -19,7 +19,7 @@
       </div>
       <div class="play-info">
         <div class="image">
-          <router-link to="/discover/player">
+          <router-link to="/song">
             <img :src="getSizeImage(picUrl, 34)" />
           </router-link>
         </div>

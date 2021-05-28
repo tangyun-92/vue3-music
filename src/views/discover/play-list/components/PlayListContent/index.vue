@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-27 10:22:59 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-27 15:22:20
+ * @Last Modified time: 2021-05-27 15:29:54
  歌单内容
  */
 <template>
@@ -23,9 +23,9 @@
 
 <script>
 import { computed, defineComponent, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import TSongsCover from '@/components/TSongsCover'
 import TPagination from '@/components/TPagination'
-import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'PlayListContent',

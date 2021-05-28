@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import player from './modules/player'
 import topList from './modules/top-list'
 import playList from './modules/play-list'
+import djRadio from './modules/dj-radio'
 // 持久化存储插件
 import createPersistedState from 'vuex-persistedstate'
 
@@ -9,7 +10,8 @@ export default createStore({
   modules: {
     player,
     topList,
-    playList
+    playList,
+    djRadio,
   },
   state: {},
   mutations: {},
