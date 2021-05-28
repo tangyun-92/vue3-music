@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-28 09:45:48 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-28 11:24:27
+ * @Last Modified time: 2021-05-28 18:03:59
  主播电台-列表组件
  */
 <template>
@@ -15,7 +15,19 @@
         </div>
         <div class="right">
           <span class="name link text-nowrap">{{ item.name }}</span>
-          <div class="dec text-nowrap">{{ item.rcmdtext }}</div>
+          <div class="dec text-nowrap" v-if="url">{{ item.rcmdtext }}</div>
+          <div class="note" v-if="!url">
+            <i class="icon sprite_icon2"></i>
+            <a href="#" class="nickname">{{ item.dj.nickname }}</a>
+            <img
+              :src="
+                item.dj.avatarDetail ? item.dj.avatarDetail.identityIconUrl : ''
+              "
+            />
+          </div>
+          <div class="count" v-if="!url">
+            共{{ item.programCount }}期&nbsp;&nbsp;&nbsp;&nbsp;订阅{{ item.subCount }}次
+          </div>
         </div>
       </div>
     </div>
@@ -38,7 +50,7 @@ export default defineComponent({
     TDjRadioTitle
   },
   setup(props) {
-    const data = computed(() => props.info.slice(0, 4))
+    const data = computed(() => props.info)
 
     return {
       getSizeImage,
@@ -60,11 +72,7 @@ export default defineComponent({
       height: 160px;
       padding: 20px 0;
       display: flex;
-
-      &:nth-child(1),
-      &:nth-child(2) {
-        border-bottom: 1px solid #e7e7e7;
-      }
+      border-bottom: 1px solid #e7e7e7;
 
       .left {
         width: 120px;
@@ -84,6 +92,34 @@ export default defineComponent({
         }
 
         .dec {
+          color: #999;
+        }
+
+        .note {
+          margin: 0 0 6px 0;
+          display: flex;
+
+          .icon {
+            width: 14px;
+            height: 15px;
+            background-position: -50px -300px;
+          }
+
+          .nickname {
+            color: #333;
+            line-height: 18px;
+            margin: 0 3px 0 8px;
+          }
+
+          img {
+            width: 13px;
+            height: 13px;
+            display: inline-block;
+            margin: 2px 0 0 0;
+          }
+        }
+
+        .count {
           color: #999;
         }
       }

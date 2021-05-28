@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-28 10:10:02 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-28 11:00:13
+ * @Last Modified time: 2021-05-28 16:09:14
  分类组件
  */
 <template>
@@ -11,8 +11,8 @@
       v-for="(item, index) in allRadioClassify"
       :key="item.id"
       class="item"
-      :class="{ active: classifyIndex === index && index < 12 }"
-      @click="handleClassify(index)"
+      :class="{ active: currentIndex === String(item.id) && index < 12 }"
+      @click="handleClassify(item)"
     >
       <a
         v-if="index === 12"
@@ -23,6 +23,7 @@
       >
       <i :class="'icon' + index"></i>
       <div class="text">{{ item.name }}</div>
+      
     </div>
   </div>
 </template>
@@ -30,12 +31,15 @@
 <script>
 import { useStore } from 'vuex'
 import { computed, defineComponent, onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'DjRadioClassify',
   setup() {
     const store = useStore()
-    const classifyIndex = ref(0)
+    const router = useRouter()
+    const route = useRoute()
+    const currentIndex = ref(route.params.id || 0) // 当前选中的分类
 
     // 所有分类
     const allRadioClassify = computed(
@@ -46,14 +50,16 @@ export default defineComponent({
       store.dispatch('djRadio/getAllRadioClassify')
     })
 
-    const handleClassify = (index) => {
-      classifyIndex.value = index
+    const handleClassify = (item) => {
+      currentIndex.value = String(item.id)
+      router.push(`/discover/dj-radio/category/${item.id}`)
     }
 
     return {
       allRadioClassify,
-      classifyIndex,
-      handleClassify
+      currentIndex,
+      handleClassify,
+      route
     }
   }
 })

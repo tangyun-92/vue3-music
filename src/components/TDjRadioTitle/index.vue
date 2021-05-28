@@ -2,13 +2,13 @@
  * @Author: 唐云 
  * @Date: 2021-05-28 09:45:48 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-28 09:54:43
+ * @Last Modified time: 2021-05-28 15:50:42
  主播电台-title组件
  */
 <template>
   <div class="dj-radio-title">
     <div class="title-left">{{ title }}</div>
-    <a :href="url" class="title-right">更多 &gt;</a>
+    <a :href="url" class="title-right" v-if="url">更多 &gt;</a>
   </div>
 </template>
 

@@ -48,17 +48,37 @@ const routes = [
           {
             path: 'dj-radio',
             name: 'DjRadio',
+            redirect: '/discover/dj-radio',
             component: () => import('@/views/discover/dj-radio'),
             meta: {
-              title: '歌单',
+              title: '主播电台',
             },
+            children: [
+              {
+                path: '',
+                name: 'DjRadioList',
+                component: () => import('@/views/discover/dj-radio/list'),
+                meta: {
+                  title: '分类',
+                },
+              },
+              {
+                path: 'category/:id',
+                name: 'DjRadioCategory',
+                component: () => import('@/views/discover/dj-radio/category'),
+                meta: {
+                  title: '分类',
+                },
+              },
+            ],
           },
+
           {
             path: 'singer',
             name: 'Singer',
             component: () => import('@/views/discover/singer'),
             meta: {
-              title: '歌单',
+              title: '歌手',
             },
           },
           {

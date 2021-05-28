@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-27 10:22:59 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-27 15:29:54
+ * @Last Modified time: 2021-05-28 17:36:35
  歌单内容
  */
 <template>
@@ -60,7 +60,7 @@ export default defineComponent({
         cat: currentClassify.value,
         order: 'hot',
         page: pageSize,
-        offset: page * 35
+        offset: (page - 1) * 35
       })
       store.commit('playList/SET_CURRENT_PAGE', page)
     }

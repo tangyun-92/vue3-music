@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-05-27 10:42:08
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-27 17:15:10
+ * @Last Modified time: 2021-05-28 17:43:42
  * 歌单
  */
 import { getPlayListClassify, getClassifySongs } from '@/api/discover/play-list'
@@ -65,7 +65,7 @@ const actions = {
    * @param {*} offset 当前第几页
    * @param {*} order 最新/最热
    */
-  getClassifySongs({ commit }, { cat, page = 35, offset = 1, order }) {
+  getClassifySongs({ commit }, { cat, page = 35, offset = 0, order }) {
     getClassifySongs(cat, page, offset, order).then((res) => {
       commit('SET_CLASSIFY_SONGS', res)
     })

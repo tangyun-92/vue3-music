@@ -32,7 +32,7 @@ export default createStore({
           topList: {
             listId: state.topList.listId,
             listIndex: state.topList.listIndex,
-          },
+          }
         }
       },
     }),

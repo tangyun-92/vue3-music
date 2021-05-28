@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-05-20 17:21:44
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-28 10:18:30
+ * @Last Modified time: 2021-05-28 16:54:40
  * 发现音乐-主播电台
  */
 import request from '@/services/request'
@@ -62,6 +62,20 @@ export function getTypeRecommends(type) {
     url: '/dj/recommend/type',
     params: {
       type,
+    },
+  })
+}
+
+/**
+ * 电台-类别热门电台
+ */
+export function getCategoryHotRadio(cateId, limit, offset) {
+  return request({
+    url: '/dj/radio/hot',
+    params: {
+      cateId,
+      offset,
+      limit,
     },
   })
 }

@@ -160,6 +160,11 @@ button {
   cursor: pointer;
 }
 
+.pagination {
+  text-align: center;
+  margin: 30px auto 10px;
+}
+
 /*修改滚动条样式*/
 div::-webkit-scrollbar {
   cursor: pointer;
