@@ -145,6 +145,10 @@ button {
   background: url(../assets/img/banner_sprite.png) no-repeat 0 9999px;
 }
 
+.singer_sprite {
+  background: url(../assets/img/singer_sprite.png) no-repeat 0 9999px;
+}
+
 .image_cover {
   position: absolute;
   left: 0;

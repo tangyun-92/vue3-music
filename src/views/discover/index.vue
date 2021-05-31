@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-18 16:41:48 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-26 15:24:44
+ * @Last Modified time: 2021-05-31 17:19:54
  发现音乐
  */
 <template>
@@ -37,7 +37,7 @@ export default defineComponent({
   setup() {
     const route = useRoute() // 路由
     const store = useStore()
-    const isActive= computed(() => route.path) // 选中状态
+    const isActive= computed(() => route.matched[2].path) // 选中状态
     /**
      * nav导航点击事件
      */

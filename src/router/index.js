@@ -76,10 +76,21 @@ const routes = [
           {
             path: 'singer',
             name: 'Singer',
+            redirect: '/discover/singer/cate/-1/1',
             component: () => import('@/views/discover/singer'),
             meta: {
               title: '歌手',
             },
+            children: [
+              {
+                path: 'cate/:area/:type',
+                name: 'SingerList',
+                component: () => import('@/views/discover/singer/list'),
+                meta: {
+                  title: '列表',
+                },
+              },
+            ],
           },
           {
             path: 'album',
