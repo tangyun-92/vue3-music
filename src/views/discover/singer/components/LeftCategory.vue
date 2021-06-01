@@ -2,12 +2,12 @@
  * @Author: 唐云 
  * @Date: 2021-05-31 15:51:38 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-31 17:06:24
+ * @Last Modified time: 2021-06-01 16:29:47
  歌手-左侧分类组件
  */
 <template>
   <div class="left-wrap">
-    <div class="item" v-for="area in list" :key="area.type">
+    <div class="item" v-for="area in singerTypeList" :key="area.type">
       <div class="tit">{{ area.title }}</div>
       <ul class="nav">
         <li v-for="item in area.list" :key="item.name">
@@ -29,58 +29,7 @@
 <script>
 import { useRoute, useRouter } from 'vue-router'
 import { defineComponent, reactive, toRefs } from 'vue'
-const list = [
-  {
-    title: '推荐',
-    id: '-1',
-    list: [{ name: '推荐歌手', type: '1' }]
-  },
-  {
-    title: '华语',
-    id: '7',
-    list: [
-      { name: '华语男歌手', type: '1' },
-      { name: '华语女歌手', type: '2' },
-      { name: '华语组合/乐队', type: '3' }
-    ]
-  },
-  {
-    title: '欧美',
-    id: '96',
-    list: [
-      { name: '欧美男歌手', type: '1' },
-      { name: '欧美女歌手', type: '2' },
-      { name: '欧美组合/乐队', type: '3' }
-    ]
-  },
-  {
-    title: '日本',
-    id: '8',
-    list: [
-      { name: '日本男歌手', type: '1' },
-      { name: '日本女歌手', type: '2' },
-      { name: '日本组合/乐队', type: '3' }
-    ]
-  },
-  {
-    title: '韩国',
-    id: '16',
-    list: [
-      { name: '韩国男歌手', type: '1' },
-      { name: '韩国女歌手', type: '2' },
-      { name: '韩国组合/乐队', type: '3' }
-    ]
-  },
-  {
-    title: '其他',
-    id: '0',
-    list: [
-      { name: '其他男歌手', type: '1' },
-      { name: '其他女歌手', type: '2' },
-      { name: '其他组合/乐队', type: '3' }
-    ]
-  }
-]
+import { singerTypeList } from '@/common/local-data'
 
 export default defineComponent({
   name: 'SingerLeftCategory',
@@ -96,11 +45,11 @@ export default defineComponent({
     const handleNav = (area, item) => {
       data.currentAreaIndex = area.id
       data.currentTypeIndex = item.type
-      router.push(`/discover/singer/cate/${area.id}/${item.type}`)
+      router.push(`/discover/singer/cate/${area.id}/${item.type}/-1`)
     }
 
     return {
-      list,
+      singerTypeList,
       ...toRefs(data),
       handleNav
     }

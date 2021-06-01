@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-28 09:35:58 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-31 16:00:07
+ * @Last Modified time: 2021-06-01 15:14:00
  歌手
  */
 <template>
@@ -41,6 +41,10 @@ export default defineComponent({
     width: 180px;
     border-right: 1px solid #d3d3d3;
     background-color: #f9f9f9;
+  }
+
+  .content {
+    width: 797px;
   }
 }
 </style>

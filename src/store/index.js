@@ -3,6 +3,7 @@ import player from './modules/player'
 import topList from './modules/top-list'
 import playList from './modules/play-list'
 import djRadio from './modules/dj-radio'
+import singer from './modules/singer'
 // 持久化存储插件
 import createPersistedState from 'vuex-persistedstate'
 
@@ -12,6 +13,7 @@ export default createStore({
     topList,
     playList,
     djRadio,
+    singer,
   },
   state: {},
   mutations: {},
@@ -32,7 +34,7 @@ export default createStore({
           topList: {
             listId: state.topList.listId,
             listIndex: state.topList.listIndex,
-          }
+          },
         }
       },
     }),
