@@ -11,16 +11,26 @@
       </li>
     </ul>
     <div class="content-list">
-      <ul>
-        <li v-for="item in singerList" :key="item.id">
+      <ul class="have-cover">
+        <li v-for="item in singerList" :key="item.id" class="have-cover-item">
           <div class="cover">
             <img :src="getSizeImage(item.img1v1Url || item.picUrl, 130)" />
             <a href="" class="mask sprite_cover"></a>
           </div>
           <div class="des">
-            <a class="name">{{ item.name }}</a>
+            <a class="name text-nowrap" :title="item.name">{{ item.name }}</a>
             <a class="icon sprite_icon2" v-if="item.accountId"></a>
           </div>
+        </li>
+      </ul>
+      <ul class="no-cover">
+        <li
+          class="no-cover-item"
+          v-for="item in singerListNoCover"
+          :key="item.id"
+        >
+          <a class="name text-nowrap" :title="item.name">{{ item.name }}</a>
+          <a class="icon sprite_icon2" v-if="item.accountId"></a>
         </li>
       </ul>
     </div>
@@ -55,9 +65,13 @@ export default defineComponent({
     // 路由参数-字母
     const initial = computed(() => route.params.initial)
 
-    // 歌手列表
+    // 歌手列表-有封面
     const singerList = computed(() =>
       store.state.singer.singerList.slice(0, 10)
+    )
+    // 歌手列表-无封面
+    const singerListNoCover = computed(() =>
+      store.state.singer.singerList.slice(-90)
     )
     // title-name
     data.title = computed(() => {
@@ -104,7 +118,8 @@ export default defineComponent({
       getSizeImage,
       singerNav,
       handleNav,
-      singerList
+      singerList,
+      singerListNoCover
     }
   }
 })
