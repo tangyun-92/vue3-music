@@ -2,11 +2,11 @@
  * @Author: 唐云 
  * @Date: 2021-05-27 10:22:59 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-27 14:57:01
+ * @Last Modified time: 2021-06-03 13:57:04
  歌单头部
  */
 <template>
-  <div class="list-header">
+  <div class="list-header" ref="dialogRef">
     <div class="wrap">
       <div class="left">
         <span class="text">{{ currentClassify }}</span>
@@ -20,7 +20,7 @@
         {{ order === 'new' ? '最新' : '热门' }}
       </span>
     </div>
-    <div class="list-dialog" v-if="showClassify">
+    <div class="list-dialog" v-show="showClassify">
       <div class="hd">
         <i class="hd-icon sprite_icon"></i>
       </div>
@@ -60,8 +60,9 @@
 </template>
 
 <script>
-import { computed, defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
+import useClickOutSide from '@/hooks/useClickOutSide'
 
 export default defineComponent({
   name: 'PlayListHeader',
@@ -71,6 +72,7 @@ export default defineComponent({
     const showClassify = ref(false)
     // 最新/最热
     const order = ref('hot')
+    const dialogRef = ref()
 
     // 歌单分类列表
     const playListClassify = computed(
@@ -81,6 +83,16 @@ export default defineComponent({
 
     onMounted(() => {
       store.dispatch('playList/getPlayListClassify')
+    })
+
+    const isClickOutSide = useClickOutSide(dialogRef)
+    watch(isClickOutSide, () => {
+      if (showClassify.value && isClickOutSide.value) {
+        showClassify.value = false
+      }
+    })
+    watch(showClassify, (newVal) => {
+      showClassify.value = newVal
     })
 
     /**
@@ -124,7 +136,8 @@ export default defineComponent({
       order,
       checkClassify,
       setShowClassify,
-      changeOrder
+      changeOrder,
+      dialogRef
     }
   }
 })
