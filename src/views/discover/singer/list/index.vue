@@ -109,7 +109,7 @@ export default defineComponent({
     const handleNav = (item) => {
       data.currentInitialIndex = item.code
       router.push(
-        `/discover/singer/cate/${route.params.area}/${route.params.type}/${item.code}`
+        `/discover/singer/${route.params.area}/${route.params.type}/${item.code}`
       )
     }
 

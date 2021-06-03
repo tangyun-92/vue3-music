@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-05-26 14:51:35
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-06-01 16:37:41
+ * @Last Modified time: 2021-06-03 15:28:46
  * 歌手
  */
 import { getSingerTypeList } from '@/api/discover/singer'

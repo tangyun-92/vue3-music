@@ -63,27 +63,26 @@ const routes = [
                 },
               },
               {
-                path: 'category/:id',
+                path: ':id',
                 name: 'DjRadioCategory',
                 component: () => import('@/views/discover/dj-radio/category'),
                 meta: {
-                  title: '分类',
+                  title: '总览',
                 },
               },
             ],
           },
-
           {
             path: 'singer',
             name: 'Singer',
-            redirect: '/discover/singer/cate/-1/1/-1',
+            redirect: '/discover/singer/-1/1/-1',
             component: () => import('@/views/discover/singer'),
             meta: {
               title: '歌手',
             },
             children: [
               {
-                path: 'cate/:area/:type/:initial?',
+                path: ':area/:type/:initial?',
                 name: 'SingerList',
                 component: () => import('@/views/discover/singer/list'),
                 meta: {
@@ -95,10 +94,21 @@ const routes = [
           {
             path: 'album',
             name: 'Album',
+            redirect: '/discover/album/ALL',
             component: () => import('@/views/discover/album'),
             meta: {
               title: '新碟上架',
             },
+            children: [
+              {
+                path: ':area',
+                name: 'AlbumOverview',
+                component: () => import('@/views/discover/album/overview'),
+                meta: {
+                  title: '总览',
+                },
+              },
+            ],
           },
         ],
       },

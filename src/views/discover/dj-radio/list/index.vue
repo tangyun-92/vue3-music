@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-28 14:42:12 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-28 18:05:56
+ * @Last Modified time: 2021-06-03 14:36:30
  主播电台-主页列表
  */
 <template>
@@ -21,32 +21,32 @@
     </div>
     <t-dj-radio-list
       :title="'音乐故事·电台'"
-      :url="'/discover/dj-radio/category/2'"
+      :url="'/discover/dj-radio/2'"
       :info="typeRecommendStory"
     />
     <t-dj-radio-list
       :title="'助眠解压·电台'"
-      :url="'/discover/dj-radio/category/6'"
+      :url="'/discover/dj-radio/6'"
       :info="typeRecommendSleeping"
     />
     <t-dj-radio-list
       :title="'谈天说地·电台'"
-      :url="'/discover/dj-radio/category/5'"
+      :url="'/discover/dj-radio/5'"
       :info="typeRecommendTalking"
     />
     <t-dj-radio-list
       :title="'情感调频·电台'"
-      :url="'/discover/dj-radio/category/3'"
+      :url="'/discover/dj-radio/3'"
       :info="typeRecommendEmotional"
     />
     <t-dj-radio-list
       :title="'创作翻唱·电台'"
-      :url="'/discover/dj-radio/category/2001'"
+      :url="'/discover/dj-radio/2001'"
       :info="typeRecommendCover"
     />
     <t-dj-radio-list
       :title="'其他·电台'"
-      :url="'/discover/dj-radio/category/11'"
+      :url="'/discover/dj-radio/11'"
       :info="typeRecommendOther"
     />
   </div>

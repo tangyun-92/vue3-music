@@ -2,11 +2,11 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 15:08:24 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-26 14:09:20
+ * @Last Modified time: 2021-06-03 15:11:27
  专辑封面组件
  */
 <template>
-  <div class="album-cover sprite_02" :style="{ width: size.width }">
+  <div class="album-cover sprite_02" :style="{ width: size.width, marginBottom: size.mb }">
     <div class="cover" :style="{ width: size.size, height: size.size }">
       <img :src="getSizeImage(data.picUrl, 150)" :alt="data.name" />
       <a
@@ -42,7 +42,8 @@ export default defineComponent({
         return {
           width: '118px',
           size: '100px',
-          bgp: '-570px'
+          bgp: '-570px',
+          mb: '0px'
         }
       }
     }

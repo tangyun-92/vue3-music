@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-19 13:35:14 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-20 10:55:49
+ * @Last Modified time: 2021-06-03 16:08:43
  新碟上架
  */
 <template>
@@ -35,7 +35,7 @@ export default defineComponent({
     const albumList = ref() // 新专辑列表
     onMounted(() => {
       getNewAlbums(5).then((res) => {
-        albumList.value = res.albums
+        albumList.value = res.weekData.slice(0, 5)
       })
     })
 

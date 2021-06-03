@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-28 10:10:02 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-05-28 16:09:14
+ * @Last Modified time: 2021-06-03 14:36:20
  分类组件
  */
 <template>
@@ -52,7 +52,7 @@ export default defineComponent({
 
     const handleClassify = (item) => {
       currentIndex.value = String(item.id)
-      router.push(`/discover/dj-radio/category/${item.id}`)
+      router.push(`/discover/dj-radio/${item.id}`)
     }
 
     return {

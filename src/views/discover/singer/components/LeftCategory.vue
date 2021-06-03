@@ -2,7 +2,7 @@
  * @Author: 唐云 
  * @Date: 2021-05-31 15:51:38 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-06-01 16:29:47
+ * @Last Modified time: 2021-06-03 14:37:43
  歌手-左侧分类组件
  */
 <template>
@@ -45,7 +45,7 @@ export default defineComponent({
     const handleNav = (area, item) => {
       data.currentAreaIndex = area.id
       data.currentTypeIndex = item.type
-      router.push(`/discover/singer/cate/${area.id}/${item.type}/-1`)
+      router.push(`/discover/singer/${area.id}/${item.type}/-1`)
     }
 
     return {
